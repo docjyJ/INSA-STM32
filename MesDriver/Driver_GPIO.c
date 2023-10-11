@@ -3,33 +3,12 @@
 
 
 void MyGPIO_Init ( GPIO_TypeDef * GPIO,  uint32_t GPIO_Pin, uint32_t GPIO_Conf) {
-	if (GPIO==GPIOA) 
-		RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
-	
-	else if (GPIO==GPIOB) 
-		RCC->APB2ENR |= RCC_APB2ENR_IOPBEN;
-	
-	else if (GPIO==GPIOC) 
-		RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
-	
-	else if (GPIO==GPIOD) 
-		RCC->APB2ENR |= RCC_APB2ENR_IOPDEN;
-	
-	#if defined (GPIOE) && defined (RCC_APB2ENR_IOPEEN)
-	  else if (GPIO==GPIOE) 
-		  RCC->APB2ENR |= RCC_APB2ENR_IOPEEN;
-	#endif
-	
-	#if defined (GPIOF) && defined (RCC_APB2ENR_IOPFEN)
-		else if (GPIO==GPIOF) 
-			RCC->APB2ENR |= RCC_APB2ENR_IOPFEN;
-	#endif
-	
-	#if defined (GPIOG) && defined (RCC_APB2ENR_IOPGEN)
-		else if (GPIO==GPIOG) 
-			RCC->APB2ENR |= RCC_APB2ENR_IOPGEN;
-	#endif
-
+	     if (GPIO==GPIOA) RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;	
+	else if (GPIO==GPIOB) RCC->APB2ENR |= RCC_APB2ENR_IOPBEN;
+	else if (GPIO==GPIOC) RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
+	else if (GPIO==GPIOD) RCC->APB2ENR |= RCC_APB2ENR_IOPDEN;
+	else if (GPIO==GPIOE) RCC->APB2ENR |= RCC_APB2ENR_IOPEEN;
+	else return;
 	
 	if (GPIO_Pin < 8) {
 			char dec = GPIO_Pin * 4;
