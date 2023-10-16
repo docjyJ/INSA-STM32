@@ -9,10 +9,13 @@ void changeLed() {
 
 
 int main() {
-	MyTimer_Base_Init(TIM1, 1000-1, 36000-1);
-	MyTimer_ActiveIT(TIM1, 2, changeLed);
-	MyTimer_Base_Start(TIM1);
-	MyGPIO_Init(GPIOA, 5, Out_Ppull);
+	MyGPIO_Init(GPIOA, 0, AltOut_Ppull);
+	MyTimer_Base_Init(TIM2, 10-1, 72-1);
+	MyTimer_PWM(TIM2, 1);
+	MyTimer_PWM_Cycle(TIM2, 1, 2-1);
+	MyTimer_Base_Start(TIM2);
 	
-	while(1);
+	while(1){
+		__asm__ ("nop");
+	}
 }

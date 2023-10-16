@@ -55,3 +55,41 @@ void MyTimer_ActiveIT(TIM_TypeDef * TIM , uint32_t  priority, void (*IT_fun) (vo
 	NVIC_EnableIRQ(TIM_IRQn);
 	NVIC_SetPriority(TIM_IRQn, priority);
 }
+
+
+void MyTimer_PWM(TIM_TypeDef * TIM , uint32_t TIM_Channel){
+	switch (TIM_Channel) {
+		case 1:
+			TIM->CCER |= TIM_CCER_CC1E;
+		  TIM->CCMR1 &= ~(TIM_CCMR1_CC1S | TIM_CCMR1_OC1M);
+		  TIM->CCMR1 |= TIM_CCMR1_OC1M_1 | TIM_CCMR1_OC1M_2;
+		  if (TIM == TIM1) TIM->BDTR = TIM_BDTR_MOE;
+		  break;
+		case 2:
+			TIM->CCER |= TIM_CCER_CC2E;
+		  TIM->CCMR1 &= ~(TIM_CCMR1_CC2S | TIM_CCMR1_OC2M);
+		  TIM->CCMR1 |= TIM_CCMR1_OC2M_1 | TIM_CCMR1_OC2M_2;
+		  if (TIM == TIM1) TIM->BDTR = TIM_BDTR_MOE;
+		  break;
+		case 3:
+			TIM->CCER |= TIM_CCER_CC3E;
+		  TIM->CCMR2 &= ~(TIM_CCMR2_CC3S | TIM_CCMR2_OC3M);
+		  TIM->CCMR2 |= TIM_CCMR2_OC3M_1 | TIM_CCMR2_OC3M_2;
+		  if (TIM == TIM1) TIM->BDTR = TIM_BDTR_MOE;
+		  break;
+		case 4:
+			TIM->CCER |= TIM_CCER_CC4E;
+		  TIM->CCMR2 &= ~(TIM_CCMR2_CC4S | TIM_CCMR2_OC4M);
+		  TIM->CCMR2 |= TIM_CCMR2_OC4M_1 | TIM_CCMR2_OC4M_2;
+		  if (TIM == TIM1) TIM->BDTR = TIM_BDTR_MOE;
+		  break;
+	}
+}
+
+void MyTimer_PWM_Cycle(TIM_TypeDef * TIM , uint32_t TIM_Channel, uint16_t CCR){
+	     if (TIM_Channel == 1) TIM->CCR1 = CCR;
+	else if (TIM_Channel == 2) TIM->CCR2 = CCR;
+	else if (TIM_Channel == 3) TIM->CCR3 = CCR; 
+	else if (TIM_Channel == 4) TIM->CCR4 = CCR;
+}
+
