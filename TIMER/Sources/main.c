@@ -12,7 +12,7 @@ int main() {
 	MyGPIO_Init(GPIOA, 0, AltOut_Ppull);
 	MyTimer_Base_Init(TIM2, 10-1, 72-1);
 	MyTimer_PWM(TIM2, 1);
-	MyTimer_PWM_Cycle(TIM2, 1, 2-1);
+	MyTimer_PWM_Cycle(TIM2, 1, 2);
 	MyTimer_Base_Start(TIM2);
 	
 	while(1){
